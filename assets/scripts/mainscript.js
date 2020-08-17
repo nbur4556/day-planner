@@ -1,8 +1,10 @@
 $(document).ready(function () {
     const m = moment();
     const timeBlocks = $('.timeblock');
+    const timeBlockInputs = $('.timeblock input');
     const timeBlockButtons = $('.timeblock button');
 
+    loadSchedule();
     blockPastTimes();
 
     //Show current day to string
@@ -13,27 +15,27 @@ $(document).ready(function () {
 
     //Disable all time blocks earlier than the current moment object
     function blockPastTimes() {
-        let timeBlockInputs = $('.timeblock input');
-
         for (let i = 0; i < timeBlockInputs.length; i++) {
-
-            if (timeBlocks[i].getAttribute('data-time') < m.hour()) {
-                timeBlockInputs[i].setAttribute('disabled', 'disabled');
-                timeBlockButtons[i].setAttribute('disabled', 'disabled');
+            if (timeBlocks.eq(i).attr('data-time') < m.hour()) {
+                //Disable text inputs and buttons before current time
+                timeBlockInputs.eq(i).css('background-color', 'grey');
+                timeBlockInputs.eq(i).attr('disabled');
+                timeBlockButtons.eq(i).attr('disabled');
             }
-            else if (timeBlocks[i].getAttribute('data-time') == m.hour()) {
-                timeBlockInputs[i].setAttribute('style', 'background-color: yellow');
+            else if (timeBlocks.eq(i).attr('data-time') == m.hour()) {
+                //Color code current time
+                timeBlockInputs.eq(i).css('background-color', 'cyan');
             }
         }
     }
 
     //Save schedule to local storage
     function saveSchedule() {
-        console.log("Save Schedule");
+        console.log('Save Schedule');
     }
 
     //Load schedule from local storage
     function loadSchedule() {
-
+        console.log('Load Schedule');
     }
 });
