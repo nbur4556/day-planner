@@ -4,6 +4,8 @@ $(document).ready(function () {
     const timeBlockInputs = $('.timeblock input');
     const timeBlockButtons = $('.timeblock button');
 
+    let fullSchedule = new Array(24);
+
     loadSchedule();
     blockPastTimes();
 
@@ -30,8 +32,14 @@ $(document).ready(function () {
     }
 
     //Save schedule to local storage
-    function saveSchedule() {
-        console.log('Save Schedule');
+    function saveSchedule(e) {
+        let selectedTimeblock = $(e.target).closest('.timeblock');
+
+        if (selectedTimeblock.children()[1].value != '') {
+            fullSchedule[selectedTimeblock.attr('data-time')] = selectedTimeblock.children()[1].value;
+        }
+
+        console.log(fullSchedule);
     }
 
     //Load schedule from local storage
