@@ -17,16 +17,26 @@ $(document).ready(function () {
 
     //Disable all time blocks earlier than the current moment object
     function blockPastTimes() {
+        let previousColor = '#575366';
+        let currentColor = '#5762D5';
+        let upcomingColor = '#ECE8EF';
+        let lightTextColor = '#ECE8EF';
+
         for (let i = 0; i < timeBlockInputs.length; i++) {
             if (timeBlocks.eq(i).attr('data-time') < m.hour()) {
                 //Disable text inputs and buttons before current time
-                timeBlockInputs.eq(i).css('background-color', 'grey');
+                timeBlockInputs.eq(i).css('background-color', previousColor);
+                timeBlockInputs.eq(i).css('color', lightTextColor);
                 timeBlockInputs.eq(i).attr('disabled');
                 timeBlockButtons.eq(i).attr('disabled');
             }
             else if (timeBlocks.eq(i).attr('data-time') == m.hour()) {
                 //Color code current time
-                timeBlockInputs.eq(i).css('background-color', 'cyan');
+                timeBlockInputs.eq(i).css('background-color', currentColor);
+                timeBlockInputs.eq(i).css('color', lightTextColor);
+            }
+            else {
+                timeBlockInputs.eq(i).css('background-color', upcomingColor);
             }
         }
     }
