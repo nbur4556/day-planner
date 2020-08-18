@@ -35,17 +35,17 @@ $(document).ready(function () {
     function saveSchedule(e) {
         let selectedTimeblock = $(e.target).closest('.timeblock');
 
-        //add selected time block input to full schedule array
-        if (selectedTimeblock.children()[1].value != '') {
-            fullSchedule[selectedTimeblock.attr('data-time')] = selectedTimeblock.children()[1].value;
-        }
-
-
+        //Add selected time block input to full schedule array and save to local storage
+        fullSchedule[selectedTimeblock.attr('data-time')] = selectedTimeblock.children()[1].value;
+        localStorage.setItem('full-schedule', JSON.stringify(fullSchedule));
     }
 
     //Load schedule from local storage
     function loadSchedule() {
-        fullSchedule[15] = "Hello World";
+        //If schedule is saved in local storage, set it equal to fullSchedule array
+        if (localStorage.getItem('full-schedule') != null) {
+            fullSchedule = JSON.parse(localStorage.getItem('full-schedule'))
+        }
 
         //Write full schedule array to all time block inputs
         for (let i = 0; i < fullSchedule.length; i++) {
