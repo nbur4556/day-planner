@@ -35,15 +35,26 @@ $(document).ready(function () {
     function saveSchedule(e) {
         let selectedTimeblock = $(e.target).closest('.timeblock');
 
+        //add selected time block input to full schedule array
         if (selectedTimeblock.children()[1].value != '') {
             fullSchedule[selectedTimeblock.attr('data-time')] = selectedTimeblock.children()[1].value;
         }
 
-        console.log(fullSchedule);
+
     }
 
     //Load schedule from local storage
     function loadSchedule() {
-        console.log('Load Schedule');
+        fullSchedule[15] = "Hello World";
+
+        //Write full schedule array to all time block inputs
+        for (let i = 0; i < fullSchedule.length; i++) {
+            if (fullSchedule[i] != undefined) {
+                timeBlockInputs.eq(i)[0].value = fullSchedule[i];
+            }
+            else {
+                timeBlockInputs.eq(i)[0].value = '';
+            }
+        }
     }
 });
