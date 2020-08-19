@@ -60,10 +60,10 @@ $(document).ready(function () {
         //Write full schedule array to all time block inputs
         for (let i = 0; i < fullSchedule.length; i++) {
             if (fullSchedule[i] != undefined) {
-                timeBlockInputs.eq(i)[0].value = fullSchedule[i];
+                timeBlockInputs.eq(i).val(fullSchedule[i]);
             }
             else {
-                timeBlockInputs.eq(i)[0].value = '';
+                timeBlockInputs.eq(i).val('');
             }
         }
     }
